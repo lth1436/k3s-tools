@@ -1,0 +1,391 @@
+# 🚀 라즈베리파이 K3s 모니터링 도구 - 즉시 설치 가이드
+
+## ⚡ 가장 빠른 방법 (2분)
+
+라즈베리파이의 **마스터 노드**에서 다음을 실행하세요:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/your-username/k3s-tools/main/install.sh | bash
+```
+
+**완료!** 이제 다음 명령어를 사용할 수 있습니다:
+
+```bash
+cd ~/k3s-monitor
+./quick-status.sh      # 빠른 상태 확인
+./realtime-monitor.sh  # 실시간 모니터링
+./cluster-diagnostics.sh # 상세 진단
+```
+
+---
+
+## 📥 파일별 직접 다운로드
+
+### 스크립트만 필요하면?
+
+```bash
+# 1. 디렉토리 생성
+mkdir -p ~/k3s-monitor
+cd ~/k3s-monitor
+
+# 2. 필요한 스크립트 다운로드
+# 아래 중 원하는 것만 실행하세요:
+
+# 옵션 A: 모두 다운로드
+curl -O https://raw.githubusercontent.com/your-username/k3s-tools/main/quick-status.sh && \
+curl -O https://raw.githubusercontent.com/your-username/k3s-tools/main/realtime-monitor.sh && \
+curl -O https://raw.githubusercontent.com/your-username/k3s-tools/main/cluster-diagnostics.sh && \
+curl -O https://raw.githubusercontent.com/your-username/k3s-tools/main/fix-k3s-permissions.sh && \
+chmod +x *.sh
+
+# 옵션 B: 하나씩 다운로드
+# 빠른 상태 확인
+curl -O https://raw.githubusercontent.com/your-username/k3s-tools/main/quick-status.sh && chmod +x quick-status.sh
+
+# 실시간 모니터링
+curl -O https://raw.githubusercontent.com/your-username/k3s-tools/main/realtime-monitor.sh && chmod +x realtime-monitor.sh
+
+# 상세 진단
+curl -O https://raw.githubusercontent.com/your-username/k3s-tools/main/cluster-diagnostics.sh && chmod +x cluster-diagnostics.sh
+
+# kubectl 권한 수정
+curl -O https://raw.githubusercontent.com/your-username/k3s-tools/main/fix-k3s-permissions.sh && chmod +x fix-k3s-permissions.sh
+
+# 3. 권한 수정 (필요시)
+sudo bash fix-k3s-permissions.sh
+
+# 4. 실행
+./quick-status.sh
+```
+
+---
+
+## 🔗 GitHub 저장소 설정
+
+### 1단계: GitHub에 파일 올리기
+
+1. **GitHub에서 새 저장소 만들기**
+   - 저장소명: `k3s-tools` (또는 원하는 이름)
+   - 설정: **Public** (모두 접근 가능)
+
+2. **파일 업로드**
+   - 이 문서와 함께 받은 모든 파일을 업로드
+   - 또는 git으로 푸시:
+   
+```bash
+# 로컬 컴퓨터에서
+git clone https://github.com/YOUR-USERNAME/k3s-tools.git
+cd k3s-tools
+
+# 파일 복사
+cp /경로/quick-status.sh .
+cp /경로/realtime-monitor.sh .
+cp /경로/cluster-diagnostics.sh .
+cp /경로/fix-k3s-permissions.sh .
+cp /경로/install.sh .
+cp /경로/README.md .
+
+# Git에 추가
+git add .
+git commit -m "Add K3s monitoring tools"
+git push origin main
+```
+
+### 2단계: 라즈베리파이에서 다운로드
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/install.sh | bash
+```
+
+**YOUR-USERNAME을 자신의 GitHub 사용자명으로 변경하세요!**
+
+---
+
+## 📊 전체 파일 목록
+
+다운로드/업로드해야 할 파일들:
+
+### 🔧 스크립트 (5개)
+
+| 파일명 | 설명 | 용도 |
+|--------|------|------|
+| `install.sh` | 자동 설치 스크립트 | 모든 파일 한번에 설치 |
+| `quick-status.sh` | 빠른 상태 확인 | 1분 안에 클러스터 상태 확인 |
+| `realtime-monitor.sh` | 실시간 모니터링 | 지속적으로 모니터링 |
+| `cluster-diagnostics.sh` | 상세 진단 | 문제 분석 및 로그 생성 |
+| `fix-k3s-permissions.sh` | 권한 수정 | kubectl 권한 자동 해결 |
+
+### 📖 가이드 문서 (5개)
+
+| 파일명 | 설명 |
+|--------|------|
+| `README.md` | 프로젝트 소개 및 빠른 시작 |
+| `quick-start.md` | K3s 빠른 시작 가이드 |
+| `monitoring-guide.md` | 모니터링 완전 가이드 |
+| `permission-fix.md` | kubectl 권한 해결 가이드 |
+| `download-guide.md` | 다운로드 및 설치 가이드 |
+
+---
+
+## 🎯 상황별 명령어
+
+### 상황 1: "지금 바로 클러스터 상태를 보고 싶어"
+
+```bash
+# 한 줄로 모든 파일 다운로드 및 실행
+curl -fsSL https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/install.sh | bash && \
+cd ~/k3s-monitor && \
+./quick-status.sh
+```
+
+### 상황 2: "권한 문제가 있어"
+
+```bash
+# 권한 스크립트 다운로드 및 실행
+curl -fsSL https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/fix-k3s-permissions.sh | bash
+```
+
+### 상황 3: "특정 스크립트만 필요해"
+
+```bash
+# 빠른 상태 확인만
+curl -O https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/quick-status.sh && \
+chmod +x quick-status.sh && \
+./quick-status.sh
+
+# 또는 실시간 모니터링만
+curl -O https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/realtime-monitor.sh && \
+chmod +x realtime-monitor.sh && \
+./realtime-monitor.sh
+```
+
+### 상황 4: "모든 가이드 문서를 보고 싶어"
+
+```bash
+cd ~/k3s-monitor
+
+# 빠른 시작
+curl -O https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/quick-start.md && less quick-start.md
+
+# 모니터링 완전 가이드
+curl -O https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/monitoring-guide.md && less monitoring-guide.md
+
+# 권한 해결
+curl -O https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/permission-fix.md && less permission-fix.md
+```
+
+---
+
+## 🔗 실제 사용 예시
+
+### 예시 1: john-doe 사용자, k3s-tools 저장소
+
+```bash
+# GitHub에 모든 파일이 업로드되었다고 가정
+
+# 자동 설치
+curl -fsSL https://raw.githubusercontent.com/john-doe/k3s-tools/main/install.sh | bash
+
+# 또는 수동으로 스크립트만 받기
+mkdir -p ~/k3s-monitor && cd ~/k3s-monitor
+curl -O https://raw.githubusercontent.com/john-doe/k3s-tools/main/quick-status.sh
+chmod +x quick-status.sh
+./quick-status.sh
+```
+
+### 예시 2: 여러 라즈베리파이에 설치
+
+```bash
+# 마스터 노드
+ssh pi@master
+curl -fsSL https://raw.githubusercontent.com/john-doe/k3s-tools/main/install.sh | bash
+
+# Worker 노드 1
+ssh pi@worker1
+curl -fsSL https://raw.githubusercontent.com/john-doe/k3s-tools/main/install.sh | bash
+
+# Worker 노드 2
+ssh pi@worker2
+curl -fsSL https://raw.githubusercontent.com/john-doe/k3s-tools/main/install.sh | bash
+```
+
+---
+
+## ✅ 설치 후 확인
+
+### 설치 완료 확인
+
+```bash
+# 다운로드된 파일 확인
+ls -la ~/k3s-monitor/
+
+# 출력 예시:
+# -rwxr-xr-x  quick-status.sh
+# -rwxr-xr-x  realtime-monitor.sh
+# -rwxr-xr-x  cluster-diagnostics.sh
+# -rwxr-xr-x  fix-k3s-permissions.sh
+# -rw-r--r--  README.md
+# ...
+```
+
+### 클러스터 상태 확인
+
+```bash
+cd ~/k3s-monitor
+./quick-status.sh
+
+# 출력 예시:
+# ════════════════════════════════════════════════
+# K3s 클러스터 상태 확인
+# ════════════════════════════════════════════════
+# 
+# ✓ 클러스터에 연결됨
+# K3s 버전: v1.24.0+k3s1
+# ...
+```
+
+---
+
+## 🆘 문제 해결
+
+### "curl: command not found"
+
+```bash
+# curl 설치
+sudo apt update
+sudo apt install curl -y
+
+# 또는 wget 사용
+wget -O - https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/install.sh | bash
+```
+
+### "Permission denied" (권한 에러)
+
+```bash
+# 자동 권한 수정
+sudo bash ~/k3s-monitor/fix-k3s-permissions.sh
+```
+
+### "Connection refused" (연결 거부)
+
+```bash
+# GitHub 접근 문제일 수 있음
+# 1. 인터넷 연결 확인
+ping github.com
+
+# 2. DNS 확인
+nslookup github.com
+
+# 3. 방화벽 확인
+sudo ufw status
+
+# 4. 로컬 저장소 사용
+# (마스터 노드에서 HTTP 서버 시작)
+python3 -m http.server 8000
+
+# (다른 노드에서)
+curl http://master-ip:8000/install.sh | bash
+```
+
+### "urllib.error" (다운로드 스크립트 오류)
+
+```bash
+# Python3 설치 확인
+python3 --version
+
+# 없으면 설치
+sudo apt install python3 -y
+```
+
+---
+
+## 📋 사전 준비 사항
+
+설치 전 확인해야 할 것들:
+
+- [x] 라즈베리파이가 켜져있는가?
+- [x] K3s가 설치되어있는가? (`k3s --version`)
+- [x] 인터넷이 연결되어있는가? (`ping 8.8.8.8`)
+- [x] curl이 설치되어있는가? (`curl --version`)
+- [x] GitHub 저장소가 준비되어있는가?
+
+---
+
+## 🔧 설정 커스터마이징
+
+### 자신의 GitHub 정보 반영하기
+
+모든 명령어에서 다음을 변경하세요:
+
+```
+https://raw.githubusercontent.com/YOUR-USERNAME/REPO-NAME/main/FILENAME
+
+변수:
+- YOUR-USERNAME: GitHub 사용자명 (예: john-doe)
+- REPO-NAME: 저장소명 (예: k3s-tools)
+- FILENAME: 파일명 (예: install.sh)
+
+예시:
+https://raw.githubusercontent.com/john-doe/k3s-tools/main/install.sh
+```
+
+### 별칭 추가 (편의 기능)
+
+```bash
+# ~/.bashrc에 추가
+echo 'alias k3s-quick="~/k3s-monitor/quick-status.sh"' >> ~/.bashrc
+echo 'alias k3s-monitor="~/k3s-monitor/realtime-monitor.sh"' >> ~/.bashrc
+echo 'alias k3s-diag="~/k3s-monitor/cluster-diagnostics.sh"' >> ~/.bashrc
+
+# 적용
+source ~/.bashrc
+
+# 이제 바로 사용 가능
+k3s-quick
+k3s-monitor
+k3s-diag
+```
+
+---
+
+## 🎉 완료!
+
+이제 다음을 할 수 있습니다:
+
+```bash
+# 1. 빠른 상태 확인
+./quick-status.sh
+
+# 2. 실시간 모니터링 (Ctrl+C로 종료)
+./realtime-monitor.sh
+
+# 3. 상세 진단
+./cluster-diagnostics.sh
+
+# 4. kubectl 직접 사용
+kubectl get nodes
+kubectl get pods -A
+kubectl top nodes
+```
+
+---
+
+## 📞 추가 정보
+
+- **GitHub 저장소**: https://github.com/YOUR-USERNAME/k3s-tools
+- **문제 해결**: `~/k3s-monitor/permission-fix.md` 참고
+- **자세한 가이드**: `~/k3s-monitor/monitoring-guide.md` 참고
+
+---
+
+## 🚀 지금 바로 시작하세요!
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/YOUR-USERNAME/k3s-tools/main/install.sh | bash
+```
+
+**YOUR-USERNAME을 자신의 GitHub 사용자명으로 변경 후 실행하세요!** ✅
+
+---
+
+**질문이 있으면 README.md와 가이드 문서들을 참고하세요!** 📖
